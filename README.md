@@ -28,6 +28,10 @@ Then clone this repository to a local directory. After changing into the directo
 
 This should download, run and provision the virtual machine.
 
+If you need only the LAMP stack pass `--tags lamp` against the playbook.
+    
+    ansible-playbook -c local /vagrant/ansible/playbook.yml --tags lamp
+
 If something goes wrong, have a look at `ansible/playbook.yml`, which contains the provisioning recipe. You can re-provision the VM using:
 
     vagrant provision
