@@ -1,6 +1,9 @@
 ---
 - name: CSS | Install rubygems package
-  action: apt pkg=rubygems-integration state=installed
+  apt: name={{ item }} state=latest
+  with_items:
+    - rubygems-integration
+    - ruby-dev 
   tags: css
 
 - name: CSS | Install SASS
