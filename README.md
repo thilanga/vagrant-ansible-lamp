@@ -34,6 +34,10 @@ If something goes wrong, have a look at `ansible/playbook.yml`, which contains t
 
 After bringing up the virtual machine, open this url in your browser: http://192.168.33.44/. You should be greeted by the `phpinfo()` output from public/index.php.
 
+    - Adminer: http://192.168.33.44/adminer.php
+        - user: vagrant
+        - password: vagrant
+
 When you're done playing with the VM, you can delete it:
 
     vagrant destroy
