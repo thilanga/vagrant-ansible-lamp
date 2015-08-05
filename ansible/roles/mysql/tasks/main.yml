@@ -1,0 +1,35 @@
+---
+- name: install MySQL
+  apt: name={{ item }} state=latest
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+  tags: lamp
+
+- name: add mysql user
+  mysql_user: name=vagrant
+              host={{ item }}
+              password=vagrant priv=*.*:ALL,GRANT
+              login_user=root
+              login_password=
+  with_items:
+    - '%'
+    - localhost
+  tags: lamp
+
+- name: create mysql databases
+  mysql_db: name={{ dbname }} state=present
+  tags: lamp
+
+- file: path=/etc/mysql/conf.d state=directory
+  tags: lamp
+
+- name: Set MySQL number of connections
+  copy: src=/vagrant/ansible/templates/max_connections.cnf dest=/etc/mysql/conf.d/max_connections.cnf
+  notify: restart mysql
+  tags: lamp
+
+- name: Install mysql command line client configuration file
+  copy: src=/vagrant/ansible/templates/my.cnf dest=/home/vagrant/.my.cnf owner=vagrant group=vagrant
+  tags: lamp

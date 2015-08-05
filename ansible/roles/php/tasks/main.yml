@@ -1,0 +1,40 @@
+---
+- name: add php5 ppa
+  apt_repository: repo='ppa:ondrej/php5'
+  tags: lamp
+
+- name: install PHP5 packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - php5
+    - libapache2-mod-php5
+    - php5-cli
+    - php5-dev
+    - php5-mysql
+    - php-pear
+    - php5-mcrypt
+    - php5-gd
+    - php5-curl
+    - php5-xdebug
+    - php5-memcache
+    - php5-memcached
+    - php5-readline
+    - php5-sqlite
+  tags: lamp
+
+- file: path=/etc/php5/conf.d state=directory
+  tags: lamp
+
+- copy: src=/vagrant/ansible/templates/php-site.ini dest=/etc/php5/conf.d/php-site.ini
+  notify: restart apache
+  tags: lamp
+
+- name: symlink common php configuration for cli handler
+  file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/cli/conf.d/php-site.ini state=link
+  notify: restart apache
+  tags: lamp
+
+- name: symlink common php configuration for apache2 handler
+  file: src=/etc/php5/conf.d/php-site.ini dest=/etc/php5/apache2/conf.d/php-site.ini state=link
+  notify: restart apache
+  tags: lamp

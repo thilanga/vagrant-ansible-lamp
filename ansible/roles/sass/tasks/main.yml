@@ -1,0 +1,23 @@
+---
+- name: CSS | Install rubygems package
+  action: apt pkg=rubygems-integration state=installed
+  tags: css
+
+- name: CSS | Install SASS
+  action: command gem install sass creates=/usr/local/bin/sass
+  tags: css
+
+- name: CSS | Install Compass
+  action: command gem install compass creates=/usr/local/bin/compass
+  tags: css
+
+- name: CSS | Install Aurora (which will install breakpoint, sass-buttons, respond-to)
+  action: command gem install compass-aurora
+  tags: css
+
+- name: ensure once more that 000-default.conf is deleted
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  notify: restart apache
+
+- name: ensure that phpmyadmin's stock config is deleted
+  file: path=/etc/apache2/conf.d/phpmyadmin.conf state=absent

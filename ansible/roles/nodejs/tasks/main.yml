@@ -1,0 +1,27 @@
+---
+- name: install misc packages
+  apt: name={{ item }} state=latest
+  with_items:
+    - rubygems-integration
+    - git-core
+    - curl
+    - unzip
+    - vim
+
+- name: Node.js | Package prerequisites for node.js
+  action: apt pkg=python-software-properties state=installed
+  tags: nodejs
+
+- name: add nodejs ppa
+  apt_repository: repo='ppa:chris-lea/node.js'
+  tags: nodejs
+
+- name: Node.js | Update the apt cache for the new repository
+  action: apt update-cache=yes
+  tags: nodejs
+
+- name: Node.js | Install nodejs and npm
+  action: apt pkg={{ item }} state=installed
+  tags: nodejs
+  with_items:
+    - nodejs

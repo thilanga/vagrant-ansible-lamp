@@ -1,0 +1,14 @@
+---
+- name: Ensure Adminer directory exists.
+  file:
+    path: "/usr/share/adminer"
+    state: directory
+    recurse: yes
+  tags: lamp
+
+- name: Download Adminer latest
+  get_url:
+    url: http://www.adminer.org/latest.php
+    dest: "/usr/share/adminer/adminer.php"
+    mode: 0644
+  tags: lamp
