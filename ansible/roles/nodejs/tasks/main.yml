@@ -3,6 +3,7 @@
   apt: name={{ item }} state=latest
   with_items:
     - rubygems-integration
+    - ruby-dev
     - git-core
     - curl
     - unzip
