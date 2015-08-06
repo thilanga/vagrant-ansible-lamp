@@ -8,7 +8,7 @@ ip = "192.168.33.44"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define name do |machine|
-    machine.vm.synced_folder "public/", "/var/www/site/html", :mount_options => ["dmode=777", "fmode=666"]
+    machine.vm.synced_folder "public/", "/var/www/html/site", :mount_options => ["dmode=777", "fmode=666"]
     machine.vm.provision :shell, :path => "ansible/provision.sh"
     machine.vm.box = "ubuntu/trusty64"
     machine.vm.hostname = "%s.metronome.private" % name

@@ -26,10 +26,10 @@
   tags: lamp
 
 - name: Set MySQL number of connections
-  copy: src=/vagrant/ansible/templates/max_connections.cnf dest=/etc/mysql/conf.d/max_connections.cnf
+  copy: src=/vagrant/ansible/roles/mysql/templates/max_connections.cnf dest=/etc/mysql/conf.d/max_connections.cnf
   notify: restart mysql
   tags: lamp
 
 - name: Install mysql command line client configuration file
-  copy: src=/vagrant/ansible/templates/my.cnf dest=/home/vagrant/.my.cnf owner=vagrant group=vagrant
+  copy: src=/vagrant/ansible/roles/mysql/templates/my.cnf dest=/home/vagrant/.my.cnf owner=vagrant group=vagrant
   tags: lamp

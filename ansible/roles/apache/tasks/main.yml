@@ -1,11 +1,4 @@
 ---
-- name: create /var/www
-  file: path=/var/www state=directory
-
-- name: create site symlink
-  file: src=/vagrant dest=/var/www/site state=link
-  notify: restart apache
-
 - name: ensure apache is installed
   apt: name=apache2 state=present
   tags: lamp
@@ -22,7 +15,7 @@
   notify: restart apache
   tags: lamp
 
-- copy: src=/vagrant/ansible/templates/site.conf dest=/etc/apache2/sites-enabled/site.conf
+- copy: src=/vagrant/ansible/roles/apache/templates/site.conf dest=/etc/apache2/sites-enabled/site.conf
   notify: restart apache
   tags: lamp
 
@@ -33,10 +26,10 @@
 - file: path=/etc/apache2/conf.d state=directory
   tags: lamp
 
-- copy: src=/vagrant/ansible/templates/fqdn.conf dest=/etc/apache2/conf.d/fqdn.conf
+- copy: src=/vagrant/ansible/roles/apache/templates/fqdn.conf dest=/etc/apache2/conf.d/fqdn.conf
   notify: restart apache
   tags: lamp
 
-- copy: src=/vagrant/ansible/templates/nosendfile.conf dest=/etc/apache2/conf.d/nosendfile.conf
+- copy: src=/vagrant/ansible/roles/apache/templates/nosendfile.conf dest=/etc/apache2/conf.d/nosendfile.conf
   notify: restart apache
   tags: lamp
