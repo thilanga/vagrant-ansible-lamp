@@ -20,6 +20,7 @@
     - php5-memcached
     - php5-readline
     - php5-sqlite
+    - php5-intl
   tags: lamp
 
 - file: path=/etc/php5/conf.d state=directory
