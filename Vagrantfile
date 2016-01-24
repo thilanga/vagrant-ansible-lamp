@@ -3,7 +3,7 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-name = "dev0"
+name = "thilanga.private"
 ip = "192.168.33.44"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.synced_folder "public/", "/var/www/html/site", :mount_options => ["dmode=777", "fmode=666"]
     machine.vm.provision :shell, :path => "ansible/provision.sh"
     machine.vm.box = "ubuntu/trusty64"
-    machine.vm.hostname = "%s.thilanga.private" % name
+    machine.vm.hostname = "%s" % name
     machine.vm.network :private_network, ip: ip
     machine.vm.provider "virtualbox" do |v|
         v.name = name

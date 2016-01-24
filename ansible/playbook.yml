@@ -7,6 +7,7 @@
 
   roles:
     - apache
+    - dnsmasq
     - php
     - mysql
     - adminer
